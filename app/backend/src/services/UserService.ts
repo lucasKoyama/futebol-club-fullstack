@@ -12,7 +12,7 @@ export default class UserService {
   async login(loginData: { email: string, password: string }): Promise<ServiceResponse<Token>> {
     const user = await this.userModel.findOne(loginData.email);
     if (!user || !bcrypt.compareSync(loginData.password, user.password)) {
-      return { status: 'UNAUTHORIZED', data: { message: 'Username or password invalid' } };
+      return { status: 'UNAUTHORIZED', data: { message: 'Invalid email or password' } };
     }
     const { id, role } = user;
     const token = jwt.sign({ id, role });

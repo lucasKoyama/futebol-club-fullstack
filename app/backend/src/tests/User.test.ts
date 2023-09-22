@@ -24,6 +24,24 @@ describe('Users test', () => {
     expect(status).to.equal(400);
   });
 
+  it('POST - /login, should return status 401 due to invalid email', async function () {
+    const invalidEmail = { "email": "admin@admin", "password": "secret_admin" };
+    const { status } = await chai.request(app).post('/login').send(invalidEmail);
+    expect(status).to.equal(401);
+  });
+
+  it('POST - /login, should return status 401 due to invalid email', async function () {
+    const invalidLengthPassword = { "email": "admin@admin.com", "password": "secre" };
+    const { status } = await chai.request(app).post('/login').send(invalidLengthPassword);
+    expect(status).to.equal(401);
+  });
+
+  it('POST - /login, should return status 401 due to non-existing user', async function () {
+    const invalidLengthPassword = { "email": "admin2@admin.com", "password": "secret_admin" };
+    const { status } = await chai.request(app).post('/login').send(invalidLengthPassword);
+    expect(status).to.equal(401);
+  });
+
   it('POST - /login, should return a token if all fields is informed correctly', async function () {
     const loginData = { "email": "admin@admin.com", "password": "secret_admin" };
     sinon.stub(SequelizeUser, 'findOne').resolves(validAdminUser as any);
