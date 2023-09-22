@@ -49,6 +49,30 @@ describe('Users test', () => {
     expect(status).to.equal(200);
     expect(body).to.have.key('token');
   });
+
+  it("GET - /login/role, should return status 401 due to lack of token", async function () {
+    sinon.stub(SequelizeUser, 'findOne').resolves(validAdminUser as any);
+    const { status } = await chai.request(app).get('/login/role').set({ "Authorization": '' })
+    expect(status).to.equal(401);
+  });
+
+  it("GET - /login/role, should return status 401 due to invalid token", async function () {
+    const loginData = { "email": "admin@admin.com", "password": "secret_admin" };
+    sinon.stub(SequelizeUser, 'findOne').resolves(validAdminUser as any);
+    const { status } = await chai.request(app).get('/login/role')
+      .send(loginData).set({ "Authorization": `Bearer invalidToken` });
+    expect(status).to.equal(401);
+  });
+
+  it("GET - /login/role, should return the user's role when passing a valid token", async function () {
+    const loginData = { "email": "admin@admin.com", "password": "secret_admin" };
+    sinon.stub(SequelizeUser, 'findOne').resolves(validAdminUser as any);
+    const { body: loginResponse } = await chai.request(app).post('/login').send(loginData);
+    const { status, body } = await chai.request(app).get('/login/role')
+      .send(loginData).set({ "Authorization": `Bearer ${loginResponse.token}` });
+    expect(status).to.equal(200);
+    expect(body).to.deep.equal({ role: 'admin' });
+  });
   afterEach(sinon.restore)
 });
 
