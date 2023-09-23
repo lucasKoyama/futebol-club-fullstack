@@ -12,4 +12,9 @@ export default class TeamController {
     if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
     res.status(200).json(data);
   }
+
+  loginRole(req: Request, res: Response) {
+    this.loginRole = this.loginRole.bind(this);
+    return res.status(200).json({ role: req.body.role });
+  }
 }

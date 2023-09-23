@@ -1,6 +1,7 @@
 import { Request, Router, Response } from 'express';
 import UserController from '../controllers/UserController';
 import LoginValidation from '../middlewares/user.middlewares';
+import TokenAuthentication from '../middlewares/auth.middleware';
 
 const userController = new UserController();
 
@@ -14,7 +15,8 @@ router.post(
 
 router.get(
   '/role',
-  LoginValidation.validateToken,
+  TokenAuthentication.validateToken,
+  (req: Request, res: Response) => userController.loginRole(req, res),
 );
 
 export default router;
