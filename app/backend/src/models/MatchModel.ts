@@ -24,4 +24,10 @@ export default class MatchModel implements IMatchModel {
     if (affectedRows === 0) return null;
     return this.model.findByPk(id);
   }
+
+  async create(match: NewEntity<IMatch>): Promise<IMatch> {
+    const dbData = await this.model.create(match);
+    const { id, homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress }: IMatch = dbData;
+    return { id, homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress };
+  }
 }

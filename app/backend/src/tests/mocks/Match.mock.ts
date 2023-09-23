@@ -793,10 +793,20 @@ const updatedMatchScore = {
   in_progress: 0,
 }
 
+const createdMatch = {
+  id: 49,
+  homeTeamId: 'São Paulo',
+  homeTeamGoals: '2',
+  awayTeamId: 'Internacional',
+  awayTeamGoals: '2',
+  inProgress: 0,
+}
+
 export {
   allMatches,
   inProgressMatches,
   finishedMatches,
   finishedMatch,
-  updatedMatchScore
+  updatedMatchScore,
+  createdMatch
 }
