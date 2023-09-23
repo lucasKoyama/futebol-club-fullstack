@@ -15,6 +15,6 @@ export default class TeamController {
 
   loginRole(req: Request, res: Response) {
     this.loginRole = this.loginRole.bind(this);
-    return res.status(200).json({ role: req.body.role });
+    return res.status(200).json({ role: req.body.user.role });
   }
 }

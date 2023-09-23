@@ -8,7 +8,7 @@ export default class TokenAuthentication {
     const token = authorization.split(' ')[1];
     try {
       const user = jwt.verify(token);
-      req.body = user;
+      req.body = { ...req.body, user };
       next();
     } catch (e) {
       return res.status(401).json({ message: 'Token must be a valid token' });

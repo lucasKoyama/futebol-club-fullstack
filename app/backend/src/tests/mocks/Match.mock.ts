@@ -775,9 +775,28 @@ const finishedMatches = [
   },
 ];
 
+const finishedMatch = {
+  id: 41,
+  home_team_id: 'São Paulo',
+  home_team_goals: '2',
+  away_team_id: 'Internacional',
+  away_team_goals: '0',
+  in_progress: 0,
+}
+
+const updatedMatchScore = {
+  id: 41,
+  home_team_id: 'São Paulo',
+  home_team_goals: '3',
+  away_team_id: 'Internacional',
+  away_team_goals: '1',
+  in_progress: 0,
+}
 
 export {
   allMatches,
   inProgressMatches,
   finishedMatches,
+  finishedMatch,
+  updatedMatchScore
 }

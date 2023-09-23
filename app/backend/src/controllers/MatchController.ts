@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import mapStatusHTTP from '../utils/mapStatusHTTP';
 import MatchService from '../services/MatchService';
 
 export default class MatchController {
@@ -16,5 +17,14 @@ export default class MatchController {
       serviceResponse = await this.matchService.findAllMatches();
     }
     return res.status(200).json(serviceResponse.data);
+  }
+
+  async updateMatch(req: Request, res: Response) {
+    const id = Number(req.params.id);
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const progressOrScore = req.url.includes('finish')
+      ? { inProgress: false } : { homeTeamGoals, awayTeamGoals };
+    const { status, data } = await this.matchService.updateMatch(id, progressOrScore);
+    return res.status(mapStatusHTTP(status)).json(data);
   }
 }
