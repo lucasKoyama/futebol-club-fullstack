@@ -94,5 +94,31 @@ describe('Matches test', () => {
     expect(status).to.equal(201);
     expect(body).to.deep.equal(createdMatch);
   });
+
+  it('POST - /matches, should return status 422 when trying to create a match with two equal teams', async function () {
+    const token = await loginToGetToken();
+    const { status, body } = await chai.request(app).post('/matches')
+      .send({
+        homeTeamId: 1,
+        homeTeamGoals: 2,
+        awayTeamId: 1,
+        awayTeamGoals: 2,
+      }).set({ "Authorization": `Bearer ${token}` });
+    expect(status).to.equal(422);
+    expect(body).to.deep.equal({ "message": "It is not possible to create a match with two equal teams" });
+  });
+
+  it('POST - /matches, should return status 404 when trying to create a match with a non-existing team', async function () {
+    const token = await loginToGetToken();
+    const { status, body } = await chai.request(app).post('/matches')
+      .send({
+        homeTeamId: 999,
+        homeTeamGoals: 2,
+        awayTeamId: 1,
+        awayTeamGoals: 2,
+      }).set({ "Authorization": `Bearer ${token}` });
+    expect(status).to.equal(404);
+    expect(body).to.deep.equal({ "message": "There is no team with such id!" });
+  });
   afterEach(sinon.restore);
 });
