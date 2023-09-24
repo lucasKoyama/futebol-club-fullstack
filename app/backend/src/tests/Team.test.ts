@@ -25,5 +25,12 @@ describe('Teams test', () => {
     expect(status).to.equal(200);
     expect(body).to.deep.equal(team);
   });
+
+  it('GET - /teams/999, should return status 404 when trying to get a non-existing team', async function() {
+    sinon.stub(SequelizeTeam, 'findOne').resolves(null as any)
+    const { status, body } = await chai.request(app).get('/teams/999');
+    expect(status).to.equal(404);
+    expect(body).to.deep.equal({ message: 'Team not found!' })
+  });
   afterEach(sinon.restore);
 });

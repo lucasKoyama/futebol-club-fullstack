@@ -1,10 +1,11 @@
+import { ILeaderModel } from '../Interfaces/leaderBoard/ILeaderModel';
 import { ServiceResponse } from '../Interfaces/ServiceResponse';
 import { ILeader } from '../Interfaces/leaderBoard/ILeader';
 import LeaderBoardModel from '../models/LeaderBoardModel';
 
 export default class LeaderBoardService {
   constructor(
-    private leaderBoardModel: LeaderBoardModel = new LeaderBoardModel(),
+    private leaderBoardModel: ILeaderModel = new LeaderBoardModel(),
   ) { }
 
   joinLeaders(lhome: ILeader, laway: ILeader[], index: number) {

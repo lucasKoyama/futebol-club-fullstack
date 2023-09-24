@@ -3,11 +3,13 @@ import { NewEntity } from '../Interfaces';
 import MatchModel from '../models/MatchModel';
 import { IMatch } from '../Interfaces/matches/IMatch';
 import { ServiceMessage, ServiceResponse } from '../Interfaces/ServiceResponse';
+import { IMatchModel } from '../Interfaces/matches/IMatchModel';
+import { ITeamModel } from '../Interfaces/teams/ITeamModel';
 
 export default class MatchService {
   constructor(
-    private matchModel = new MatchModel(),
-    private teamModel = new TeamModel(),
+    private matchModel: IMatchModel = new MatchModel(),
+    private teamModel: ITeamModel = new TeamModel(),
   ) { }
 
   async findAllMatches(inProgress?: boolean): Promise<ServiceResponse<IMatch[]>> {
