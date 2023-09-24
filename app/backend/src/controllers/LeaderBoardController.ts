@@ -7,7 +7,8 @@ export default class LeaderBoardController {
   ) { }
 
   async findAll(req: Request, res: Response) {
-    const { data } = await this.leaderBoardService.findAll();
+    const filter = req.url.split('/')[1];
+    const { data } = await this.leaderBoardService.findAll(filter);
     res.status(200).json(data);
   }
 }

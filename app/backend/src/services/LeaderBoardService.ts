@@ -7,8 +7,8 @@ export default class LeaderBoardService {
     private leaderBoardModel: LeaderBoardModel = new LeaderBoardModel(),
   ) { }
 
-  async findAll(): Promise<ServiceResponse<ILeader[]>> {
-    const leaders = await this.leaderBoardModel.findAll();
+  async findAll(filter: string): Promise<ServiceResponse<ILeader[]>> {
+    const leaders = await this.leaderBoardModel.findAll(filter);
     return { status: 'SUCCESSFUL', data: leaders };
   }
 }

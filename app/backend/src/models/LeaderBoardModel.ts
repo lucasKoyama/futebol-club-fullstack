@@ -8,7 +8,8 @@ export default class LeaderBoardModel implements ILeaderModel {
   private p = 'totalVictories * 3 + totalDraws';
   private j = 'totalVictories + totalDraws + totalLosses';
 
-  async findAll(): Promise<ILeader[]> {
+  async findAll(filter: string): Promise<ILeader[]> {
+    const team = filter === 'home' ? ['home_team', 'away_team'] : ['away_team', 'home_team'];
     const result = await this.model.sequelize?.query(`
       SELECT *, ${this.p} AS 'totalPoints', ${this.j} AS 'totalGames',
         goalsFavor - goalsOwn AS 'goalsBalance',
@@ -16,11 +17,11 @@ export default class LeaderBoardModel implements ILeaderModel {
       FROM (
         SELECT
           team_name AS 'name',
-          SUM(home_team_goals > away_team_goals) AS 'totalVictories',
-          SUM(home_team_goals = away_team_goals) AS 'totalDraws',
-          SUM(home_team_goals < away_team_goals) AS 'totalLosses',
-          SUM(home_team_goals) AS 'goalsFavor', SUM(away_team_goals) AS 'goalsOwn'
-        FROM matches AS m INNER JOIN teams AS t ON m.home_team_id = t.id WHERE in_progress = 0
+          SUM(${team[0]}_goals > ${team[1]}_goals) AS 'totalVictories',
+          SUM(${team[0]}_goals = ${team[1]}_goals) AS 'totalDraws',
+          SUM(${team[0]}_goals < ${team[1]}_goals) AS 'totalLosses',
+          SUM(${team[0]}_goals) AS 'goalsFavor', SUM(${team[1]}_goals) AS 'goalsOwn'
+        FROM matches AS m INNER JOIN teams AS t ON m.${team[0]}_id = t.id WHERE in_progress = 0
           GROUP BY t.team_name)
       AS result ORDER BY totalPoints DESC, totalVictories DESC, goalsBalance DESC, goalsFavor DESC;
     `, { type: QueryTypes.SELECT });

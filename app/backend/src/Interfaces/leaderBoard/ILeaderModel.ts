@@ -1,5 +1,5 @@
 import { ILeader } from './ILeader';
 
 export interface ILeaderModel {
-  findAll(): Promise<ILeader[]>
+  findAll(filter: string): Promise<ILeader[]>
 }
