@@ -35,11 +35,7 @@ export default class LeaderBoardService {
   async findAll(filter: string): Promise<ServiceResponse<ILeader[]>> {
     let leaders;
     if (filter === '') {
-      const sortNames = (l1: ILeader, l2: ILeader) => {
-        if (l1.name < l2.name) return -1;
-        if (l1.name > l2.name) return 1;
-        return 0;
-      };
+      const sortNames = (l1: ILeader, l2: ILeader) => (l1.name < l2.name ? -1 : 1); // wont't have equal names here
       const homeLeaders = (await this.leaderBoardModel.findAll('home')).sort(sortNames);
       const awayLeaders = (await this.leaderBoardModel.findAll('away')).sort(sortNames);
       leaders = homeLeaders
