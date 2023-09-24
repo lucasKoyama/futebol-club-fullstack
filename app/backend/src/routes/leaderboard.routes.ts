@@ -9,4 +9,6 @@ router.get('/home', (req: Request, res: Response) => leaderBoardController.findA
 
 router.get('/away', (req: Request, res: Response) => leaderBoardController.findAll(req, res));
 
+router.get('/', (req: Request, res: Response) => leaderBoardController.findAll(req, res));
+
 export default router;
