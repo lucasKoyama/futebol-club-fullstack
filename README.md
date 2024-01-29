@@ -1,17 +1,18 @@
 # Overview - Futebol Club Full-Stack
+![tfc](https://github.com/lucasKoyama/futebol-club-fullstack/assets/121680414/0fe57e59-f71f-4146-a95e-2b7bd2f86742)
 
 <details>
   <summary>Summary</summary>
 
-  1. [Tools used]()
-  2. [Running Locally]()
-  3. [Endpoint HTTP Methods]()<br/>
-    3.2 [Endpoint /login]()<br/>
-    3.2 [Endpoint /teams]()<br/>
-    3.2 [Endpoint /matches]()<br/>
-    3.2 [Endpoint /leaderboard]()<br/>
-  4. [Authors]()
-  5. [Styles for cloned repo!]()
+  1. [Tools used](https://github.com/lucasKoyama/futebol-club-fullstack?tab=readme-ov-file#tools-used)
+  2. [Running Locally](https://github.com/lucasKoyama/futebol-club-fullstack?tab=readme-ov-file#running-locally)
+  3. [Endpoint HTTP Methods](https://github.com/lucasKoyama/futebol-club-fullstack?tab=readme-ov-file#endpoint-http-methods)<br/>
+    3.2 [Endpoint /login](https://github.com/lucasKoyama/futebol-club-fullstack?tab=readme-ov-file#endpoint-login)<br/>
+    3.2 [Endpoint /teams](https://github.com/lucasKoyama/futebol-club-fullstack?tab=readme-ov-file#endpoint-teams)<br/>
+    3.2 [Endpoint /matches](https://github.com/lucasKoyama/futebol-club-fullstack?tab=readme-ov-file#endpoint-matches)<br/>
+    3.2 [Endpoint /leaderboard](https://github.com/lucasKoyama/futebol-club-fullstack?tab=readme-ov-file#endpoint-leaderboard)<br/>
+  4. [Authors](https://github.com/lucasKoyama/futebol-club-fullstack?tab=readme-ov-file#authors)
+  5. [Styles for cloned repo!](https://github.com/lucasKoyama/futebol-club-fullstack?tab=readme-ov-file#styles-for-cloned-repo)
 </details>
 
 That was a project's course, and I had to do the entire backend (tests, models, migrations, services, controllers, routes, middlewares and some queries using Sequelize ORM or SQL query) endpoints based on a README description with features of each endpoint. The frontend came finished; I just had to do the Dockerfile.
@@ -28,7 +29,7 @@ That was a project's course, and I had to do the entire backend (tests, models, 
 
 # Running Locally
 1. Clone this repository: `git clone https://github.com/lucasKoyama/futebol-club-fullstack.git`
-2. Go to project folder: `cd futebol-club-fullstack`
+2. Go to project folder: `cd futebol-club-fullstack/app`
 3. Inside project folders run docker: `docker-compose up -d --build`
 4. Access demo via http://localhost:3000/
 
@@ -934,7 +935,7 @@ Requires HEADER with token
 
 # Authors
 - [lucasKoyama](https://github.com/lucasKoyama)
-- Trybe (frontend)
+- Trybe (made the frontend)
 
 # Styles for cloned repo!
 <style>
